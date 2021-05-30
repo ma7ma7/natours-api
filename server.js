@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const app = require('./app');
+const mongoose = require('mongoose');
 
 dotenv.config({
   path: './config.env',
@@ -16,26 +16,6 @@ mongoose
     useFindAndModify: false,
   })
   .then((con) => console.log('🗃  Database connection success ✓ '));
-
-// Schema
-const tourSchema = new mongoose.Schema({
-  name: String,
-  rating: {
-    type: Number,
-    required: true,
-  },
-});
-// model
-const Tour = new mongoose.model('Tour', tourSchema);
-
-// prepare query
-const example = new Tour({ name: 'mahmoud', rating: 4 });
-
-// save query
-example
-  .save()
-  .then((doc) => console.log(doc))
-  .catch((err) => console.log(err.message));
 
 const port = process.env.PORT || 3000;
 
