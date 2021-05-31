@@ -80,3 +80,27 @@ exports.createTour = async (req, res) => {
     });
   }
 };
+
+// update a document
+exports.updateTour = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const tour = await Tour.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(204).json({
+      status: 'success',
+      requestedAt: req.requestTime,
+      data: {
+        tour,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'Error',
+      message: error.message,
+    });
+  }
+};
