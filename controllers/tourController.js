@@ -58,3 +58,25 @@ exports.getTour = async (req, res) => {
     });
   }
 };
+
+// Insert Document
+exports.createTour = async (req, res) => {
+  try {
+    // const tour = new Tour(req.body);
+    // tour.save();
+    const tour = await Tour.create(req.body);
+
+    res.status(201).json({
+      status: 'success',
+      requestedAt: req.requestTime,
+      data: {
+        tour,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'Error',
+      message: error.message,
+    });
+  }
+};
