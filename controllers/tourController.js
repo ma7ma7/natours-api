@@ -104,3 +104,21 @@ exports.updateTour = async (req, res) => {
     });
   }
 };
+
+// Delete document
+exports.deleteDocument = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Tour.findByIdAndDelete(id);
+
+    res.status(202).json({
+      status: 'Succes',
+      message: 'Document is deleted',
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'Error',
+      message: error.message,
+    });
+  }
+};
